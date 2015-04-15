@@ -112,9 +112,7 @@ def swissPairings():
     """ **** Extra credit ****
     If there are an odd number of players run query to get the player with the most matches 
     and most wins. Add an entry into the pairings with this player receiving a bye.
-    Then remove that player from the list of standings used to create the swiss pairings.
-    """
-    section check for an odd number of players    
+    Then remove that player from the list of standings used to create the swiss pairings.  """   
     if len(standings) % 2 != 0: 
         # get the player with the most matches and wins to give the bye to
         excld = dbExecute("SELECT matchesplayed.id " + \
