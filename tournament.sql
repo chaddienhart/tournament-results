@@ -35,6 +35,13 @@ GROUP BY a.id
 ORDER BY win_count DESC
 ;
 
+CREATE VIEW standings AS
+SELECT matchesplayed.id, matchesplayed.name, 
+    COALESCE(wins.win_count, 0) AS wins, 
+    matchesplayed.count AS matches_played 
+FROM matchesplayed LEFT JOIN wins ON matchesplayed.id = wins.id 
+ORDER BY wins.win_count DESC NULLS LAST;
+
 
 -- for testing in sqlfiddle.com
 -- insert into players (id, name) VALUES (DEFAULT, 'test1');

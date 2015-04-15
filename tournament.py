@@ -70,10 +70,7 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    standings = dbExecute("SELECT matchesplayed.id, matchesplayed.name, " + \
-                          "COALESCE(wins.win_count, 0)AS wins, matchesplayed.count AS matches_played " + \
-                          "FROM matchesplayed LEFT JOIN wins ON matchesplayed.id = wins.id " + \
-                          "ORDER BY wins.win_count DESC NULLS LAST;", True)
+    standings = dbExecute("SELECT * FROM standings;", True)
     return standings
 
 def reportMatch(winner, loser, tie = 'false'):
@@ -103,9 +100,7 @@ def swissPairings():
     """
     # join the matchesplayed view with the wins view on player id, then order by descending
     # number of wins, with nulls last (in case there are players who have not played yet)
-    standings = dbExecute("SELECT matchesplayed.id, matchesplayed.name " + \
-                          "FROM matchesplayed LEFT JOIN wins ON matchesplayed.id = wins.id " + \
-                          "ORDER BY wins.win_count DESC NULLS LAST;", True)
+    standings = dbExecute("SELECT id, name FROM standings;", True)
                           
     pairings = [] # create a list that will get the tuples appended and returned
     
